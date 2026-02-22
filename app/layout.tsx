@@ -25,10 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen`}
       >
         {children}
-        <footer className="bg-indigo-600">
+        <footer className="bg-indigo-600 absolute inset-x-0 bottom-0 flex justify-center items-center h-25">
           <h1>footer</h1>
         </footer>
       </body>
