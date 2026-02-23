@@ -1,4 +1,5 @@
 import Image from "next/image";
+import FinanceDataCard from "@/components/FinanceDataCard";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
         </p>
       </header>
       {/* total balance card */}
-      <main className="flex py-5 justify-center">
+      <section className="flex py-5 justify-center">
         <div id="total balance container">
           <p>
             total balance
@@ -27,9 +28,24 @@ export default function Home() {
             <span>$6,345.15</span>
           </p>
         </div>
-        {/* total income & expense card */}
-        <div></div>
-      </main>
+      </section>
+      {/* total income & expense card */}
+      <section className="flex justify-around pt-5">
+        {/* income */}
+        <FinanceDataCard
+          type="income"
+          imagesrc="/globe.svg"
+          amount={2734.79}
+          percent={10}
+        />
+        {/* expense */}
+        <FinanceDataCard
+          type="expense"
+          imagesrc="/globe.svg"
+          amount={1253.35}
+          percent={7}
+        />
+      </section>
     </>
   );
 }
