@@ -1,14 +1,21 @@
 import Image from "next/image";
 
-export default function FinanceDataCard(
-  type: string,
-  imagesrc: string,
-  amount: number,
-  percent: number,
-) {
+type CardProps = {
+  type: string;
+  imagesrc: string;
+  amount: number;
+  percent: number;
+};
+
+export default function FinanceDataCard({
+  type,
+  imagesrc,
+  amount,
+  percent,
+}: CardProps) {
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col bg-white py-5 px-8 border-0 rounded-2xl">
         <Image
           className="w-5 h-5"
           src={imagesrc}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,10 +30,10 @@ export default function RootLayout({
       >
         {children}
         <nav className="bg-indigo-600 absolute inset-x-0 bottom-0 flex justify-between items-center h-25 px-5">
-          <button>Home</button>
-          <button>transactions</button>
-          <button>category</button>
-          <button>settings</button>
+          <Link href={"/"}>Home</Link>
+          <Link href={"/transactions"}>transactions</Link>
+          <Link href={"/categories"}>category</Link>
+          <Link href={"/settings"}>settings</Link>
         </nav>
       </body>
     </html>

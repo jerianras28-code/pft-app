@@ -5,9 +5,9 @@ export default function Home() {
   return (
     <>
       {/* welcome back card */}
-      <header className="flex gap-5 pb-5">
+      <header className="flex gap-5 py-2.5 items-center">
         <Image
-          className="w-10 h-10 border border-black rounded-[100px]"
+          className="w-10 h-10 border border-black rounded-full"
           src={"/vercel.svg"}
           alt="profile picture"
           height={100}
@@ -22,10 +22,12 @@ export default function Home() {
       {/* total balance card */}
       <section className="flex py-5 justify-center">
         <div id="total balance container">
-          <p>
+          <p className="text-gray-400">
             total balance
             <br />
-            <span>$6,345.15</span>
+            <span className="text-indigo-400 text-2xl font-bold">
+              $6,345.15
+            </span>
           </p>
         </div>
       </section>
