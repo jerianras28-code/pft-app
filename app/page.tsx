@@ -21,14 +21,12 @@ export default function Home() {
       </header>
       {/* total balance card */}
       <section className="flex py-5 justify-center">
-        <div id="total balance container">
-          <p className="text-gray-400">
-            total balance
-            <br />
-            <span className="text-indigo-400 text-2xl font-bold">
-              $6,345.15
-            </span>
-          </p>
+        <div
+          id="total balance container"
+          className="flex flex-col justify-center"
+        >
+          <p className="text-gray-400 text-center">total balance</p>
+          <p className="text-indigo-600 text-4xl font-bold">$6,345.15</p>
         </div>
       </section>
       {/* total income & expense card */}
