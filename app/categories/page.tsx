@@ -1,3 +1,5 @@
+import CategoryCard from "@/components/CategoryCard";
+
 export default function Categroies() {
   return (
     <>
@@ -8,6 +10,9 @@ export default function Categroies() {
       <button className="w-full bg-indigo-400 border-0 rounded-xl h-10">
         <i className=" bg-white border-0 rounded-full">+</i>Add Category
       </button>
+      <section>
+        <CategoryCard imagesrc="/file.svg" title="Food" />
+      </section>
     </>
   );
 }
