@@ -1,10 +1,26 @@
 import Image from "next/image";
 
-type CardProps = { imagesrc: string; title: string; subdata?: string };
+type CardProps = {
+  imagesrc: string;
+  title: string;
+  subdata?: string;
+  //   temporarily made bools optional
+  isfirst?: boolean;
+  islast?: boolean;
+};
 
-export default function SettingsCards({ imagesrc, title, subdata }: CardProps) {
+export default function SettingsCards({
+  imagesrc,
+  title,
+  subdata,
+  isfirst,
+  islast,
+}: CardProps) {
   return (
-    <div className=" bg-white flex justify-between items-center border-0 rounded-3xl p-5 my-5">
+    <div
+      //  used ternery operater for dynamic card design
+      className={`bg-white flex justify-between items-center border-0 p-5 my-5 ${isfirst ? "rounded-t-3xl" : ""} ${islast ? "rounded-b-3xl" : ""} rounded-3xl `}
+    >
       <div className="flex gap-5 items-center">
         <div className="border-0 rounded-2xl h-10 w-10 flex justify-center items-center bg-indigo-100">
           <Image
