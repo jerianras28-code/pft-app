@@ -27,9 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-black">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen pt-5 px-5`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen max-w-md mx-auto pt-5 px-5 md:`}
       >
         {children}
         <nav className="bg-white absolute inset-x-0 bottom-0 flex justify-between items-center h-25 px-5">
