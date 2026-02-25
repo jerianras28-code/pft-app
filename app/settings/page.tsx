@@ -1,4 +1,5 @@
 import SettingsCards from "@/components/SettingsCards";
+import FullButton from "@/components/FullButton";
 import Image from "next/image";
 
 export default function Settings() {
@@ -28,6 +29,7 @@ export default function Settings() {
       <section className="py-2.5">
         <SettingsCards imagesrc="/file.svg" title="Time-Zone" subdata="GMT-4" />
       </section>
+      <FullButton icon={`>`} title="Log Out" />
     </>
   );
 }
