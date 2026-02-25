@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "PFT app",
   description: "keep all your finances in check",
+  icons: {
+    apple: "/favicon/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
