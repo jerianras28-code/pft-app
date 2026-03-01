@@ -16,7 +16,7 @@ export const usersTable = pgTable("users_table", {
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
   name: text("name").notNull(),
-  age: integer("age").notNull(),
+  age: integer("age"),
   email: text("email").notNull().unique(),
   emailVerified: timestamp("email_verified", { mode: "date" }),
   image: text("image"),
@@ -46,7 +46,7 @@ export const accountsTable = pgTable(
       }),
     },
   ],
-);
+).enableRLS();
 
 export const categoryTable = pgTable("category_table", {
   id: serial("id").primaryKey(),
