@@ -10,6 +10,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     accountsTable: accountsTable,
   }),
   callbacks: {
+    session({ session, token }) {
+      session.user.id = token.sub as string;
+      return session;
+    },
     authorized: async ({ auth }) => {
       // logged in users are authenticated, otherwise redirect to login page
       return !!auth;

@@ -1,14 +1,18 @@
 import Image from "next/image";
 import FinanceDataCard from "@/components/FinanceDataCard";
+import { auth } from "@/auth";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const session = await auth();
+  const userName = session?.user?.name ?? "user";
+  const userImage = session?.user?.image ?? "/";
   return (
     <>
       {/* welcome back card */}
       <header className="flex gap-5 py-2.5 items-center">
         <Image
           className="w-10 h-10 border border-black rounded-full"
-          src={"/vercel.svg"}
+          src={userImage}
           alt="profile picture"
           height={100}
           width={100}
@@ -16,7 +20,7 @@ export default function Dashboard() {
         <p>
           Welcome back
           <br />
-          <span>User</span>
+          <span>{userName}</span>
         </p>
       </header>
       {/* total balance card */}
