@@ -51,7 +51,7 @@ export const accountsTable = pgTable(
 export const categoryTable = pgTable("category_table", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  userId: integer("user_id")
+  userId: text("user_id")
     .notNull()
     .references(() => usersTable.id, { onDelete: "cascade" }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -67,7 +67,7 @@ export const transactionTable = pgTable("transaction_table", {
   description: text("description").notNull(),
   amount: numeric("amount").notNull(),
   date: date("date").notNull(),
-  userId: integer("user_id")
+  userId: text("user_id")
     .notNull()
     .references(() => usersTable.id, { onDelete: "cascade" }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
