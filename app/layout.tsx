@@ -34,7 +34,7 @@ export default function RootLayout({
         {children}
         <nav className="bg-white absolute inset-x-0 bottom-0 flex justify-between items-center h-25 px-5">
           <Link
-            href={"/"}
+            href={"/dashboard"}
             className="text-gray-400 hover:text-indigo-600 active:text-indigo-600 target:text-indigo-600"
           >
             Home
