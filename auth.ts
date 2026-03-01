@@ -9,6 +9,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     usersTable: usersTable,
     accountsTable: accountsTable,
   }),
+  callbacks: {
+    authorized: async ({ auth }) => {
+      // logged in users are authenticated, otherwise redirect to login page
+      return !!auth;
+    },
+  },
   session: { strategy: "jwt" },
   providers: [Google],
 });

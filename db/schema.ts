@@ -46,7 +46,7 @@ export const accountsTable = pgTable(
       }),
     },
   ],
-).enableRLS();
+);
 
 export const categoryTable = pgTable("category_table", {
   id: serial("id").primaryKey(),
