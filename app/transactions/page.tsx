@@ -1,6 +1,24 @@
+import Indexes from "@/actions";
+import { auth } from "@/auth";
 import TransactionCard from "@/components/TransactionCard";
+import { db } from "@/db";
+import { transactionTable } from "@/db/schema";
+import { eq } from "drizzle-orm";
+import { redirect } from "next/navigation";
 
-export default function Transactions() {
+export default async function Transactions() {
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  if (!userId) {
+    redirect("api/auth/signin");
+  }
+  const transactions = await db
+    .select()
+    .from(transactionTable)
+    .where(eq(transactionTable.userId, userId));
+
+  console.log(transactions);
   return (
     <>
       <header className="py-2.5">
@@ -21,20 +39,7 @@ export default function Transactions() {
         </div>
       </header>
       <section>
-        <TransactionCard
-          imagesrc="/window.svg"
-          title="Starbucks"
-          ttype="cash"
-          amount={7.36}
-          time="07:30 PM"
-        />
-        <TransactionCard
-          imagesrc="/window.svg"
-          title="Starbucks"
-          ttype="cash"
-          amount={7.36}
-          time="07:30 PM"
-        />
+        <Indexes />
       </section>
     </>
   );
