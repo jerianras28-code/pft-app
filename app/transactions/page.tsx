@@ -1,9 +1,9 @@
 import Indexes from "@/actions";
 import { auth } from "@/auth";
-import TransactionCard from "@/components/TransactionCard";
 import { db } from "@/db";
 import { transactionTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function Transactions() {
@@ -33,9 +33,11 @@ export default async function Transactions() {
               className="bg-white h-10 px-5 border-0 rounded-xl max-w-full w-full"
             />
           </form>
-          <button className="bg-indigo-400 h-10 w-10 border-0 rounded-xl hover:bg-indigo-600 active:bg-indigo-600">
-            +
-          </button>
+          <Link href={"/transactions/new"}>
+            <button className="bg-indigo-400 h-10 w-10 border-0 rounded-xl hover:bg-indigo-600 active:bg-indigo-600">
+              +
+            </button>
+          </Link>
         </div>
       </header>
       <section>
