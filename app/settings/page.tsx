@@ -1,8 +1,20 @@
 import SettingsCards from "@/components/SettingsCards";
 import FullButton from "@/components/FullButton";
 import Image from "next/image";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
-export default function Settings() {
+export default async function Settings() {
+  const session = await auth();
+  const userId = session?.user?.id;
+  const userPhoto = session?.user?.image ?? "/";
+  const userName = session?.user?.name ?? "user";
+  const userEmail = session?.user?.email;
+
+  if (!userId) {
+    redirect("/api/auth/signin");
+  }
+
   return (
     <>
       <header className="py-2.5">
@@ -12,17 +24,17 @@ export default function Settings() {
         <div className="flex flex-col justify-center items-center gap-3">
           <div className=" p-4 border-0 rounded-full bg-gray-400">
             <Image
-              src={"/vercel.svg"}
+              src={userPhoto}
               alt="Profile Piture"
-              width={100}
-              height={100}
+              width={500}
+              height={500}
               className="h-12 w-12 text-indigo-600"
             />
           </div>
 
           <div className="flex flex-col justify-center items-center">
-            <p className="text-xl font-semibold">UserName</p>
-            <p className="text-xs text-gray-400">Useremail@example.com</p>
+            <p className="text-xl font-semibold">{userName}</p>
+            <p className="text-xs text-gray-400">{userEmail}</p>
           </div>
         </div>
       </section>

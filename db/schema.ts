@@ -7,6 +7,7 @@ import {
   date,
   numeric,
   primaryKey,
+  pgEnum,
 } from "drizzle-orm/pg-core";
 import { AdapterAccountType } from "next-auth/adapters";
 
@@ -61,12 +62,15 @@ export const categoryTable = pgTable("category_table", {
   deleteAt: timestamp("delete_at"),
 }).enableRLS();
 
+export const transactionEnum = pgEnum("transactionType", ["expense", "income"]);
+
 export const transactionTable = pgTable("transaction_table", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   description: text("description").notNull(),
   amount: numeric("amount").notNull(),
   date: date("date").notNull(),
+  transactionType: transactionEnum().notNull(),
   userId: text("user_id")
     .notNull()
     .references(() => usersTable.id, { onDelete: "cascade" }),

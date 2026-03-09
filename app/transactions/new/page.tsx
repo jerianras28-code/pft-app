@@ -10,6 +10,7 @@ export default function NewTransaction() {
     const description = formdata.get("formdescription");
     const amount = formdata.get("formamount");
     const date = formdata.get("formdate");
+    const transactionType = formdata.get("formtransactiontype");
 
     const session = await auth();
     const userId = session?.user?.id;
@@ -24,6 +25,7 @@ export default function NewTransaction() {
       amount: amount as string,
       date: date as string,
       userId: userId,
+      transactionType: transactionType as "income" | "expense",
     });
   }
 
@@ -52,6 +54,24 @@ export default function NewTransaction() {
           name="formamount"
           id="formamount"
         />
+        <p>Income or Expense</p>
+        <label>Income</label>
+        <input
+          type="radio"
+          name="formtransactiontype"
+          id="formtransactiontype"
+          value="income"
+        />
+        <br />
+        <label>Expense</label>
+        <input
+          type="radio"
+          name="formtransactiontype"
+          id="formtransactiontype"
+          value="expense"
+        />
+        <br />
+        <br />
         <input className="bg-white" type="date" name="formdate" id="formdate" />
         <button className=" hover:" type="submit">
           Submit pls

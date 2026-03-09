@@ -1,24 +1,9 @@
-import Indexes from "@/actions";
-import { auth } from "@/auth";
-import { db } from "@/db";
-import { transactionTable } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { transactionData } from "@/actions";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import TransactionCard from "@/components/TransactionCard";
 
 export default async function Transactions() {
-  const session = await auth();
-  const userId = session?.user?.id;
-
-  if (!userId) {
-    redirect("api/auth/signin");
-  }
-  const transactions = await db
-    .select()
-    .from(transactionTable)
-    .where(eq(transactionTable.userId, userId));
-
-  console.log(transactions);
+  const transactions = await transactionData();
   return (
     <>
       <header className="py-2.5">
@@ -41,7 +26,18 @@ export default async function Transactions() {
         </div>
       </header>
       <section>
-        <Indexes />
+        {transactions.map((items) => {
+          return (
+            <TransactionCard
+              imagesrc="./vercel.svg"
+              time={items.date}
+              title={items.title}
+              ttype={items.description}
+              amount={Number(items.amount)}
+              key={items.id}
+            />
+          );
+        })}
       </section>
     </>
   );

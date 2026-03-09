@@ -1,11 +1,44 @@
 import Image from "next/image";
 import FinanceDataCard from "@/components/FinanceDataCard";
 import { auth } from "@/auth";
+import { db } from "@/db";
+import { transactionTable } from "@/db/schema";
+import { and, eq, sum } from "drizzle-orm";
+import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
   const session = await auth();
   const userName = session?.user?.name ?? "user";
   const userImage = session?.user?.image ?? "/";
+  const userId = session?.user?.id ?? redirect("/api/auth/signin");
+
+  const transactionsTotal = await db
+    .select({ value: sum(transactionTable.amount) })
+    .from(transactionTable)
+    .where(eq(transactionTable.userId, userId));
+  const totalBalance = Number(transactionsTotal[0].value ?? 0);
+
+  const transactionsExpense = await db
+    .select({ value: sum(transactionTable.amount) })
+    .from(transactionTable)
+    .where(
+      and(
+        eq(transactionTable.userId, userId),
+        eq(transactionTable.transactionType, "expense"),
+      ),
+    );
+  const totalExpense = Number(transactionsExpense[0].value ?? 0);
+
+  const transactionsIncome = await db
+    .select({ value: sum(transactionTable.amount) })
+    .from(transactionTable)
+    .where(
+      and(
+        eq(transactionTable.userId, userId),
+        eq(transactionTable.transactionType, "income"),
+      ),
+    );
+  const totalIncome = Number(transactionsIncome[0].value ?? 0);
   return (
     <>
       {/* welcome back card */}
@@ -30,7 +63,9 @@ export default async function Dashboard() {
           className="flex flex-col justify-center"
         >
           <p className="text-gray-400 text-center">total balance</p>
-          <p className="text-indigo-600 text-4xl font-bold">$6,345.15</p>
+          <p className="text-indigo-600 text-4xl font-bold">
+            {totalIncome > totalExpense ? "" : "-"} ${totalBalance}
+          </p>
         </div>
       </section>
       {/* total income & expense card */}
@@ -39,15 +74,15 @@ export default async function Dashboard() {
         <FinanceDataCard
           type="income"
           imagesrc="/globe.svg"
-          amount={2734.79}
-          percent={10}
+          amount={totalIncome}
+          percent={0}
         />
         {/* expense */}
         <FinanceDataCard
           type="expense"
           imagesrc="/globe.svg"
-          amount={1253.35}
-          percent={7}
+          amount={totalExpense}
+          percent={0}
         />
       </section>
     </>
