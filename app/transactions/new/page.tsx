@@ -48,7 +48,7 @@ export default function NewTransaction() {
         <input
           className="bg-white"
           placeholder="amount"
-          type="number"
+          type="numeric"
           name="formamount"
           id="formamount"
         />

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Archive, Pen } from "lucide-react";
 
 type CardProps = {
   imagesrc: string;
@@ -28,9 +29,9 @@ export default function CategoryCard({ imagesrc, title, ttype }: CardProps) {
       </div>
 
       {/* edit & archive */}
-      <div className="flex justify-between">
-        <i className="text-sm font-bold">pencilI</i>
-        <i className="text-xs text-gray-400">archiveI</i>
+      <div className="flex justify-between gap-3">
+        <Pen size={20} />
+        <Archive size={20} />
       </div>
     </div>
   );
