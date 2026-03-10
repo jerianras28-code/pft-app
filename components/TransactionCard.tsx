@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 
 type CardProps = {
@@ -6,6 +7,7 @@ type CardProps = {
   ttype: string;
   amount: number;
   time: string;
+  ondelete: () => void;
 };
 
 export default function TransactionCard({
@@ -14,6 +16,7 @@ export default function TransactionCard({
   ttype,
   amount,
   time,
+  ondelete,
 }: CardProps) {
   return (
     <div className=" bg-white flex justify-between items-center border-0 rounded-[10px] p-5 my-5">
@@ -40,6 +43,12 @@ export default function TransactionCard({
         <p className="text-sm font-bold">${amount}</p>
         <p className="text-xs text-gray-400">{time}</p>
       </div>
+      <button
+        onClick={ondelete}
+        className="bg-red-400 h-10 w-10 border-0 rounded-xl hover:bg-red-600 active:bg-red-600"
+      >
+        x
+      </button>
     </div>
   );
 }

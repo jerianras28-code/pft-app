@@ -1,4 +1,4 @@
-import { transactionData } from "@/actions";
+import { deleteTransaction, transactionData } from "@/actions";
 import Link from "next/link";
 import TransactionCard from "@/components/TransactionCard";
 
@@ -34,6 +34,7 @@ export default async function Transactions() {
               title={items.title}
               ttype={items.description}
               amount={Number(items.amount)}
+              ondelete={deleteTransaction.bind(null, items.id)}
               key={items.id}
             />
           );
